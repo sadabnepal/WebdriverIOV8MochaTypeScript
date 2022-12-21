@@ -1,9 +1,9 @@
-name: CI
+name: Smoke Suite
 on:
   workflow_dispatch:
-    artifacts:
+    save_artifacts:
       description: "Save Report in Artifact"
-      required: false
+      required: true
       type: boolean
   push:
     branches:
@@ -17,9 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: Checkout Code
-          uses: actions/checkout@v2.6.0
+          uses: actions/checkout@v2
         - name: Setup Node.js environment
-          uses: actions/setup-node@v3.5.1
+          uses: actions/setup-node@v3
           with:
             node-version: 18
         - name: Install Dependencies
@@ -28,8 +28,8 @@ jobs:
           run: npm run test-remote
           continue-on-error: true
         - name: Upload Allure Report to Artifact
-          if: github.event.inputs.artifacts  == true
-          uses: actions/upload-artifact@v3.1.1
+          if: ${{ github.event.inputs.save_artifacts }}
+          uses: actions/upload-artifact@v3
           with:
             name: AllureReport
             path: ./allure-report
