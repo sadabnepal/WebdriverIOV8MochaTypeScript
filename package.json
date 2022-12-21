@@ -19,6 +19,6 @@
   },
   "scripts": {
     "test": "wdio run ./wdio.conf.ts",
-    "test:remote": "wdio run ./wdio.remote.ts"
+    "test-remote": "wdio run ./wdio.remote.ts"
   }
 }

@@ -5,16 +5,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: Checkout Code
-          uses: actions/checkout@v2
-        - uses: actions/setup-node@v1
+          uses: actions/checkout@v2.6.0
+        - name: Setup Node.js environment
+          uses: actions/setup-node@v3.5.1
           with:
             node-version: 18
         - name: Install Dependencies
           run: npm install
         - name: Run Test
-          run: npm run test:remote
-        - name: Save Report
-          uses: actions/upload-artifact@v1
+          run: npm run test-remote
+        - name: Upload Allure Report to Artifact
+          uses: actions/upload-artifact@v3.1.1
           with:
             name: AllureReport
             path: ./allure-report
